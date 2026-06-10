@@ -1,0 +1,39 @@
+{
+  "country_code": "81",
+  "gate_version": "1.2.0",
+  "last_updated": "2026-06-10T01:30:00Z",
+  "tracked_policies": [
+    {
+      "id": "81_policy_constitution_1946",
+      "era_tag": "1945_1952_ghq",
+      "category": "CONSTITUTION",
+      "title": "日本国憲法の制定・公布プロセス",
+      "status": "HISTORICAL_LOG",
+      "file_path": "eras/1945_1952_ghq/policies/81_constitution.json"
+    },
+    {
+      "id": "81_policy_funding_2026",
+      "era_tag": "2000_present_modern",
+      "category": "POLITICAL_FUNDING",
+      "title": "政治資金規正法の改正と収支報告書データ化ログ",
+      "status": "DEBATING",
+      "file_path": "eras/2000_present_modern/policies/81_funding.json"
+    },
+    {
+      "id": "81_policy_digital_infra_2026",
+      "era_tag": "2000_present_modern",
+      "category": "DIGITAL_INFRA",
+      "title": "デジタル公的個人認証と全公金受取口座の完全紐付け",
+      "status": "ENACTED",
+      "file_path": "eras/2000_present_modern/policies/81_digital_infra.json"
+    },
+    {
+      "id": "81_policy_immigration_2026",
+      "era_tag": "2000_present_modern",
+      "category": "IMMIGRATION_CONTROL",
+      "title": "出入国管理法の改正と在留資格手続き・手数料仕様の変更履歴",
+      "status": "ENACTED",
+      "file_path": "eras/2000_present_modern/policies/81_immigration.json"
+    }
+  ]
+}
