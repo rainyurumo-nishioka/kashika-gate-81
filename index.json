@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KASHIKA PROTOCOL // GATE-81: JAPAN</title>
+    <!-- Tailwind CSS (デザインベース) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Noto Sans JP', 'JetBrains Mono', monospace;
+            background-color: #050b14;
+            color: #e2e8f0;
+        }
+        .cyber-grid {
+            background-image: linear-gradient(rgba(0, 242, 254, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 242, 254, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            border-color: #00f2fe;
+        }
+    </style>
+</head>
+<body class="cyber-grid min-h-screen">
+
+    <!-- 1. グローバルヘッダーネットワークトポロジ -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="h-3 w-3 rounded-full bg-[#00f2fe] animate-pulse"></div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-wider text-white font-mono">KASHIKA // GATE-81</h1>
+                    <p class="text-xs text-slate-400 font-mono">SECURE FACT TRACKING SYSTEM</p>
+                </div>
+            </div>
+            <!-- メタステータス表示（インデックスから動的注入） -->
+            <div class="flex gap-6 text-xs font-mono bg-slate-900 px-4 py-2 rounded border border-slate-800">
+                <div>GATE VER: <span id="meta-version" class="text-[#00f2fe]">---</span></div>
+                <div>LAST SYNC: <span id="meta-updated" class="text-slate-300">---</span></div>
+                <div>STATUS: <span class="text-emerald-400">ONLINE</span></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. メインコンテンツエリア -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        
+        <!-- コンテキスト説明 -->
+        <div class="mb-10 p-6 bg-slate-950 border border-slate-800 rounded-lg">
+            <h2 class="text-sm font-mono text-[#00f2fe] mb-2">// CORE PRINCIPLE</h2>
+            <p class="text-sm text-slate-300 leading-relaxed">
+                本ノードは、日本の国家政策、法改正、システム仕様の変遷履歴から感情論を完全に排除し、純粋なパラメーターの変更履歴（Mutation Logs）として構造化・記録する自律型分散台帳のフロントエンドゲートウェイです。
+            </p>
+        </div>
+
+        <!-- 政策インデックスカードグリッド -->
+        <div class="mb-6 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <span class="font-mono text-[#00f2fe]">#</span> 監視対象プロトコル一覧
+            </h3>
+            <span id="policy-count" class="text-xs font-mono bg-slate-800 px-2 py-1 rounded text-slate-400">0 TRACKED</span>
+        </div>
+
+        <!-- エラーハンドリング・ローディング -->
+        <div id="loading-state" class="text-center py-12 font-mono text-slate-500 animate-pulse">
+            INITIALIZING DATA PIPELINE...
+        </div>
+
+        <!-- メイングリッドコンテナ -->
+        <div id="policy-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transition-opacity duration-500">
+            <!-- JavaScriptによって自動生成されたカードがここに動的に挿入されます -->
+        </div>
+    </main>
+
+    <!-- 3. 詳細データモーダルポップアップ -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-950 border border-slate-800 w-full max-w-4xl max-h-[85vh] rounded-lg overflow-hidden flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-slate-800 flex justify-between items-start bg-slate-900">
+                <div>
+                    <span id="modal-category" class="text-xs font-mono text-[#00f2fe] bg-[#00f2fe]/10 px-2 py-0.5 rounded">CATEGORY</span>
+                    <h2 id="modal-title" class="text-xl font-bold text-white mt-2">Policy Title</h2>
+                    <p id="modal-id" class="text-xs font-mono text-slate-500 mt-1">ID: ---</p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white font-mono text-lg p-1">&times;</button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-6 flex-1 text-sm">
+                <!-- ソースエビデンスリンク -->
+                <div>
+                    <h4 class="font-mono text-xs text-slate-400 uppercase tracking-wider mb-2">■ 一次情報検証ソース（エビデンス）</h4>
+                    <ul id="modal-sources" class="space-y-1.5 list-disc pl-4 text-slate-300">
+                        <!-- 動的注入 -->
+                    </ul>
+                </div>
+
+                <!-- パラメーター変更履歴のタイムライン -->
+                <div>
+                    <h4 class="font-mono text-xs text-slate-400 uppercase tracking-wider mb-3">■ 変異パラメーターログ（Structural Mutations）</h4>
+                    <div id="modal-mutations" class="space-y-4">
+                        <!-- 動的注入 -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-900/50 flex justify-end">
+                <button onclick="closeModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded text-xs font-mono transition-colors">
+                    CLOSE MATRIX
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. 完全自動解析エンジン（インテリジェントルーティングコア） -->
+    <script>
+        // 設定されたインデックスファイルの名前（同一ディレクトリ内、またはパスを指定）
+        const MASTER_INDEX_URL = 'gate_master.json'; 
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initGateEngine();
+        });
+
+        // ゲートエンジン初期化
+        async function initGateEngine() {
+            try {
+                // Step 1: インデックスマスターファイルの取得
+                const response = await fetch(MASTER_INDEX_URL);
+                if (!response.ok) throw new Error(`Failed to load index: ${response.status}`);
+                const masterData = await response.json();
+
+                // Step 2: メタヘッダーの動的同期
+                document.getElementById('meta-version').textContent = `v${masterData.gate_version}`;
+                document.getElementById('meta-updated').textContent = new Date(masterData.last_updated).toLocaleString('ja-JP');
+                document.getElementById('policy-count').textContent = `${masterData.tracked_policies.length} TRACKED`;
+
+                // Step 3: グリッドカードの自動レンダリングループ
+                const gridContainer = document.getElementById('policy-grid');
+                gridContainer.innerHTML = ''; // クリア
+
+                masterData.tracked_policies.forEach(policy => {
+                    const card = createPolicyCard(policy);
+                    gridContainer.appendChild(card);
+                });
+
+                // ローディング表示を消してグリッドを表示
+                document.getElementById('loading-state').classList.add('hidden');
+                gridContainer.classList.remove('opacity-0');
+
+            } catch (error) {
+                console.error('[KASHIKA CORE ERROR]', error);
+                document.getElementById('loading-state').innerHTML = `
+                    <span class="text-rose-500">❌ PIPELINE CORRUPTED: CONNECTOR FAILED.</span><br>
+                    <span class="text-xs text-slate-600">${error.message}</span>
+                `;
+            }
+        }
+
+        // 政策カードのHTML要素生成
+        function createPolicyCard(policy) {
+            const div = document.createElement('div');
+            div.className = 'bg-slate-950 border border-slate-800 rounded-lg p-5 flex flex-col justify-between transition-all duration-300 glow-border';
+            
+            // ステータスに応じたカラーラベリング
+            let statusColor = 'text-slate-400 border-slate-700 bg-slate-900';
+            if (policy.status === 'ENACTED') statusColor = 'text-emerald-400 border-emerald-900/50 bg-emerald-950/20';
+            if (policy.status === 'DEBATING') statusColor = 'text-amber-400 border-amber-900/50 bg-amber-950/20';
+            if (policy.status === 'HISTORICAL_LOG') statusColor = 'text-[#00f2fe] border-[#00f2fe]/30 bg-[#00f2fe]/5';
+
+            div.innerHTML = `
+                <div>
+                    <div class="flex justify-between items-start gap-2 mb-3">
+                        <span class="text-[10px] font-mono tracking-wider bg-slate-900 text-slate-400 px-2 py-0.5 rounded uppercase border border-slate-800">${policy.category}</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded border ${statusColor}">${policy.status}</span>
+                    </div>
+                    <h4 class="text-md font-bold text-white leading-snug mb-2">${policy.title}</h4>
+                    <p class="text-xs font-mono text-slate-500 mb-4">ERA: ${policy.era_tag}</p>
+                </div>
+                <button onclick="loadPolicyDetail('${policy.file_path}')" class="w-full text-center py-2 bg-slate-900 hover:bg-[#00f2fe]/10 hover:text-[#00f2fe] text-xs font-mono border border-slate-800 hover:border-[#00f2fe]/50 rounded text-slate-300 transition-all cursor-pointer">
+                    INSPECT DATA_SOCKET &rarr;
+                </button>
+            `;
+            return div;
+        }
+
+        // 各ファイルのJSONを詳細にフェッチしてモーダルへ流し込む
+        async function loadPolicyDetail(filePath) {
+            const modal = document.getElementById('detail-modal');
+            
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error(`詳細ファイルの取得に失敗しました: status ${response.status}`);
+                const detail = await response.json();
+
+                // モーダルデータのマッピング
+                document.getElementById('modal-title').textContent = detail.title || '無題のプロトコル';
+                document.getElementById('modal-category').textContent = detail.category;
+                document.getElementById('modal-id').textContent = `ID: ${detail.policy_id} (LAST UPDATED: ${detail.last_updated})`;
+
+                // ソースリンクの構築
+                const sourceContainer = document.getElementById('modal-sources');
+                sourceContainer.innerHTML = '';
+                if (detail.source_documents && detail.source_documents.length > 0) {
+                    detail.source_documents.forEach(doc => {
+                        const li = document.createElement('li');
+                        // 万が一文字列がURLっぽい形、または特定のテキストであればリンク化を試みる
+                        if (doc.startsWith('http')) {
+                            li.innerHTML = `<a href="${doc}" target="_blank" class="text-[#00f2fe] hover:underline font-mono break-all">${doc}</a>`;
+                        } else {
+                            // 政府公示テキストなどのタイトル
+                            li.textContent = doc;
+                        }
+                        sourceContainer.appendChild(li);
+                    });
+                } else {
+                    sourceContainer.innerHTML = '<span class="text-slate-500 font-mono">No official documents linked.</span>';
+                }
+
+                // 変異パラメーターログの構築
+                const mutationsContainer = document.getElementById('modal-mutations');
+                mutationsContainer.innerHTML = '';
+
+                if (detail.structural_mutations && detail.structural_mutations.length > 0) {
+                    detail.structural_mutations.forEach(mut => {
+                        const mutBlock = document.createElement('div');
+                        mutBlock.className = 'bg-slate-900/50 border border-slate-800 p-4 rounded-md';
+                        
+                        let mutationItemsHTML = '';
+                        if (mut.mutations && mut.mutations.length > 0) {
+                            mut.mutations.forEach(m => {
+                                // 数値の変異か、ステータスの変更かで表示の出し分け
+                                const hasFromTo = m.from !== undefined && m.to !== undefined;
+                                mutationItemsHTML += `
+                                    <div class="mt-2 pl-3 border-l-2 border-[#00f2fe]/30 font-mono text-xs text-slate-300 grid grid-cols-1 sm:grid-cols-3 gap-1 py-1 bg-slate-950/40 px-2 rounded">
+                                        <div class="text-slate-400 font-bold">${m.parameter}</div>
+                                        <div class="sm:col-span-2">
+                                            ${hasFromTo ? `<span class="text-rose-400 line-through">${m.from}</span> &rarr; <span class="text-emerald-400 font-bold">${m.to}</span> ${m.unit || ''}` : `<span class="text-sky-400 font-bold">${m.status || ''}</span>`}
+                                            ${m.dependency_target ? `<span class="text-xs text-slate-500 block">Dependency: ${m.dependency_target}</span>` : ''}
+                                            ${m.note ? `<span class="text-xs text-slate-400 block mt-0.5 font-sans">${m.note}</span>` : ''}
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        }
+
+                        mutBlock.innerHTML = `
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-1.5 mb-2">
+                                <span class="font-mono font-bold text-white text-xs text-[#00f2fe]">${mut.event}</span>
+                                <span class="font-mono text-[11px] text-slate-400">${mut.date}</span>
+                            </div>
+                            <p class="text-xs text-slate-300 font-sans mb-2">${mut.description}</p>
+                            <div class="space-y-1">${mutationItemsHTML}</div>
+                        `;
+                        mutationsContainer.appendChild(mutBlock);
+                    });
+                } else {
+                    mutationsContainer.innerHTML = '<div class="text-slate-500 font-mono text-xs">No structural mutations log available.</div>';
+                }
+
+                // モーダルオープン
+                modal.classList.remove('hidden');
+
+            } catch (err) {
+                alert(`データのフェッチ中にエラーが発生しました:\n${err.message}`);
+            }
+        }
+
+        // モーダルを閉じる
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        // モーダルの外側をクリックしたら閉じる設定
+        document.getElementById('detail-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detail-modal')) closeModal();
+        });
+    </script>
+</body>
+</html>
