@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KASHIKA PROTOCOL // GATE-81: JAPAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Noto Sans JP', 'JetBrains Mono', monospace;
+            background-color: #050b14;
+            color: #e2e8f0;
+        }
+        .cyber-grid {
+            background-image: linear-gradient(rgba(0, 242, 254, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 242, 254, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="cyber-grid min-h-screen pb-12">
+
+    <header class="border-b border-slate-900 bg-slate-950/90 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl font-bold tracking-widest text-white font-mono">KASHIKA // 81</h1>
+                <p class="text-xs text-[#00f2fe] tracking-wider font-mono">JAPAN SECTOR FEDERAL LEDGER</p>
+            </div>
+            <div class="flex gap-2 text-[11px] font-mono">
+                <span class="px-3 py-1 bg-[#00f2fe]/10 text-[#00f2fe] border border-[#00f2fe]/30 rounded">2000 - PRESENT 現代：分散型デジタルOS検証期</span>
+                <span class="px-3 py-1 bg-slate-900 text-slate-500 rounded border border-slate-800">1945 - 1952 占領期</span>
+                <span class="px-3 py-1 bg-slate-900 text-slate-500 rounded border border-slate-800">1895 - 1945 大日本帝国</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-8">
+        <div class="mb-8 border-l-2 border-[#00f2fe] pl-4 py-2 bg-slate-950/60">
+            <h2 class="text-xs font-mono text-[#00f2fe]">現代セクター (2000_present_modern)</h2>
+            <p class="text-sm text-slate-400 mt-1">並列インデックスされた構造化ログのクロスゲート相互突合（アサーション）</p>
+        </div>
+
+        <div id="matrix-container" class="space-y-12">
+            <div id="loading" class="text-center py-12 font-mono text-slate-500 animate-pulse">
+                LOADING FEDERAL LEDGER DATA NODES...
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // あなたの目次インデックスデータ（本来はfetchしますが、今回は構造を即座に動かすため内部にバインド）
+        const masterIndex = {
+            "country_code": "81",
+            "tracked_policies": [
+                {
+                    "id": "81_prop_2026_vote",
+                    "title": "デジタル公的個人認証・市民対話投票インフラの整備案",
+                    "description": "2026年度国内システム仕様変更案。先行する海外ゲートのデータ構造をアサーション（突合）し、設計バグの事前検知を行うバックアップ対象政策。",
+                    "status": "PROPOSED",
+                    "budget": "12,000,000 USD",
+                    "port": "taiwan-digital-civics@getalby.com",
+                    "binding_type": "⚡ CROSS-GATE BINDING: AUTONOMOUS BACKUP (海外前例による構造支援あり)",
+                    "target_gate": "[Gate 886: Taiwan] の実証ファクト",
+                    "target_title": "vTaiwan（デジタル市民対話プラットフォーム）の法整備",
+                    "metrics": [
+                        { "label": "新産業進出に伴う法改正の合意形成期間", "before": "不透明・長期の政治論争", "after": "わずか 4 週間でステークホルダー間の合意形成を完了" },
+                        { "label": "市民提案の政策（閣議上程）反映率", "before": "5% 未満 (陳情止まり)", "after": "80% 以上の合意案が実際に閣議へ上程・可決" }
+                    ],
+                    "auditor_org": "東大阪シビックテック結社",
+                    "auditor_count": 42,
+                    "pointer_1": "kashika-gate-81/.../81_digital_infra.json",
+                    "pointer_2": "kashika-gate-886/.../886_g0v_vtaiwan.json"
+                },
+                {
+                    "id": "81_policy_immigration_2026",
+                    "title": "出入国管理法の改正と在留資格手続き・手数料仕様の変更履歴",
+                    "description": "2026年度外国人労働者受入数の123万人急拡大、および管理インフラ要件の厳格化に伴う国内手続きパラメーターの変異ログ。",
+                    "status": "ENACTED",
+                    "budget": "N/A (ADMINISTRATIVE)",
+                    "port": "japan-immigration-scribe@getalby.com",
+                    "binding_type": "⚡ FACT-ASSERTION BINDING: SYSTEM MAXIMUM MUTATION (法定制限値の大幅変更)",
+                    "target_gate": "[Gate 372: Estonia] 類似電子IDスキーム突合",
+                    "target_title": "特定在留カード（マイナンバーカード原則一体化）の強制仕様と手数料",
+                    "metrics": [
+                        { "label": "在留資格変更・更新手続きの法定手数料上限", "before": "一律 10,000 JPY (旧OS標準値)", "after": "最大 100,000 JPY (上限10倍への変異バースト)" },
+                        { "label": "永住許可申請手続きの法定手数料上限", "before": "一律 10,000 JPY (旧OS標準値)", "after": "最大 300,000 JPY (上限30倍へのセキュリティ障壁化)" }
+                    ],
+                    "auditor_org": "京都分散台帳監査ギルド",
+                    "auditor_count": 19,
+                    "pointer_1": "kashika-gate-81/.../81_immigration.json",
+                    "pointer_2": "kashika-gate-372/.../372_xroad_identity.json"
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('matrix-container');
+            container.innerHTML = ''; // クリア
+
+            masterIndex.tracked_policies.forEach(policy => {
+                const section = document.createElement('section');
+                section.className = 'bg-slate-950 border border-slate-900 rounded-lg p-6 shadow-xl relative overflow-hidden';
+                
+                // メトリクスのテーブル行を生成
+                let metricsHTML = '';
+                policy.metrics.forEach(m => {
+                    metricsHTML += `
+                        <tr class="border-b border-slate-900 text-xs font-mono">
+                            <td class="py-3 px-2 text-slate-400 font-sans w-1/3">${m.label}</td>
+                            <td class="py-3 px-2 text-rose-400 line-through bg-rose-950/10">${m.before}</td>
+                            <td class="py-3 px-2 text-emerald-400 font-bold bg-emerald-950/10">➔ ${m.after}</td>
+                        </tr>
+                    `;
+                });
+
+                section.innerHTML = `
+                    <div class="text-[10px] font-mono text-slate-500 tracking-widest mb-2">MATRIX BINDING</div>
+                    <h3 class="text-lg font-bold text-white mb-2">${policy.title}</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">${policy.description}</p>
+                    
+                    <div class="text-xs font-mono text-[#00f2fe] mb-4 bg-[#00f2fe]/5 p-2 rounded border border-[#00f2fe]/20">
+                        ${policy.binding_type}
+                    </div>
+
+                    <div class="border border-slate-900 rounded p-4 bg-slate-900/20 mb-4">
+                        <div class="text-[11px] font-mono text-slate-500 mb-2">[ 1次ファクト台帳・クロスゲート接続ポインタ ]</div>
+                        <div class="flex flex-wrap justify-between text-xs font-mono mb-4 gap-2">
+                            <div>kashika-gate-81 (日本国案) <span class="text-slate-500">ID:</span> <span class="text-white">${policy.id}</span></div>
+                            <div><span class="text-slate-500">STATUS:</span> <span class="text-amber-400 font-bold">${policy.status}</span></div>
+                            <div><span class="text-slate-500">BUDGET:</span> <span class="text-slate-300">${policy.budget}</span></div>
+                            <div class="text-lg">🔮</div>
+                        </div>
+
+                        <div class="bg-slate-950 p-3 rounded border border-slate-900 mb-4">
+                            <div class="text-[11px] font-mono text-slate-400 mb-2">海外参照ゲート自動結合 ${policy.target_gate}</div>
+                            <div class="text-xs text-[#00f2fe] font-bold mb-3">TARGET: ${policy.target_title}</div>
+                            
+                            <table class="w-full text-left border-collapse">
+                                border-b border-slate-800
+                                <thead class="text-[10px] font-mono text-slate-500 uppercase bg-slate-900/50">
+                                    <tr>
+                                        <th class="p-2">検証指標</th>
+                                        <th class="p-2">導入前の旧OSバグ</th>
+                                        <th class="p-2">導入後の実証結果</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${metricsHTML}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="border border-dashed border-slate-800 p-4 rounded bg-slate-950">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                                <div class="text-xs font-mono text-emerald-400 flex items-center gap-1">
+                                    <span>⚡</span> THANK THIS FACT // このファクトデータに助けられた
+                                </div>
+                                <button class="px-3 py-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-mono font-bold rounded transition-colors cursor-pointer">
+                                    ⚡ 感謝を表明する
+                                </button>
+                            </div>
+                            <div class="text-xs font-mono text-slate-300 bg-slate-900 px-3 py-1.5 rounded break-all mb-2 border border-slate-800">
+                                P2P_PORT: <span class="text-[#00f2fe]">${policy.port}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
+                                ※このデータが国内システム設計の『穴』を埋めるのに役立った際、感謝を直接送金できます（中抜き0%）。比率の通り開発ロールへ自動で傾斜分配されます。
+                            </p>
+                            <div class="flex flex-wrap gap-4 text-[11px] font-mono">
+                                <span class="text-[#00f2fe]">● シアン: 記述兵 (Scribe) 70%</span>
+                                <span class="text-amber-400">● ゴールド: 査読兵 (Auditor) 20%</span>
+                                <span class="text-purple-400">● パープル: 接続兵 (Architect) 10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs font-mono border-t border-slate-900 pt-4 text-slate-400">
+                        <div class="flex items-center gap-2">
+                            <span class="text-slate-600">[ 国内貢献ロール認証 ]</span>
+                            <span class="text-white font-sans font-bold">${policy.auditor_org}</span>
+                        </div>
+                        <div class="text-amber-400">
+                            🛡️ AUDITOR / 相互マージ査読: ${policy.auditor_count}回完了
+                        </div>
+                    </div>
+
+                    <div class="mt-3 pt-3 border-t border-dashed border-slate-900 text-[11px] font-mono text-slate-600 space-y-0.5">
+                        <div class="text-slate-500">[ コア結合ポインタ・メタデータ ]</div>
+                        <div>POINTER_1: <span class="text-slate-400">${policy.pointer_1}</span></div>
+                        <div>POINTER_2: <span class="text-slate-400">${policy.pointer_2}</span></div>
+                    </div>
+                `;
+                container.appendChild(section);
+            });
+        });
+    </script>
+</body>
+</html>
